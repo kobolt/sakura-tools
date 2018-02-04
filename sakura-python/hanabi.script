@@ -1,0 +1,12 @@
+d1 on
+sleep 50
+d1 off
+sleep 50
+d2 on
+d3 on
+sleep 100
+d2 off
+sleep 100
+d3 off
+sleep 500
+d4 toggle
