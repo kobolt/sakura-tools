@@ -93,6 +93,8 @@ static opcode_t command_eval(char *cmd, signed char len)
     return OPCODE_D4_ON;
   } else if (command_match(cmd, len, opcode_command(OPCODE_D4_TOGGLE))) {
     return OPCODE_D4_TOGGLE;
+  } else if (command_match(cmd, len, opcode_command(OPCODE_BUTTON))) {
+    return OPCODE_BUTTON;
   } else if (command_match(cmd, len, opcode_command(OPCODE_SCRIPT_RUN))) {
     return OPCODE_SCRIPT_RUN;
   } else if (command_match(cmd, len, opcode_command(OPCODE_SCRIPT_STOP))) {

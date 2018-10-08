@@ -28,6 +28,8 @@ typedef enum {
   OPCODE_D4_ON        = 0x51,
   OPCODE_D4_TOGGLE    = 0x52,
 
+  OPCODE_BUTTON       = 0x60,
+
   OPCODE_SCRIPT_RUN   = 0x101,
   OPCODE_SCRIPT_STOP  = 0x102,
   OPCODE_SCRIPT_DUMP  = 0x103,
