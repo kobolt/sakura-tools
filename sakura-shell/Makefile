@@ -7,7 +7,7 @@ LDFLAGS = -Wl,--gc-sections,--strip-debug -nostartfiles
 sakura.bin: sakura.elf
 	$(TOOL_PATH)/rx-elf-objcopy -O binary $^ $@
 
-sakura.elf: crt0.o main.o led.o button.o uart.o timer.o script.o opcode.o command.o
+sakura.elf: crt0.o main.o led.o button.o adc.o uart.o timer.o script.o opcode.o command.o
 	$(TOOL_PATH)/rx-elf-gcc $(LDFLAGS) -T common/sakura_rx.ld $^ -o $@
 
 crt0.o: common/sakura_crt0.S
@@ -17,6 +17,9 @@ led.o: led.c
 	$(TOOL_PATH)/rx-elf-gcc $(CFLAGS) $^ -o $@
 
 button.o: button.c
+	$(TOOL_PATH)/rx-elf-gcc $(CFLAGS) $^ -o $@
+
+adc.o: adc.c
 	$(TOOL_PATH)/rx-elf-gcc $(CFLAGS) $^ -o $@
 
 timer.o: timer.c

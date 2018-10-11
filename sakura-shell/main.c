@@ -1,5 +1,6 @@
 #include "led.h"
 #include "button.h"
+#include "adc.h"
 #include "uart.h"
 #include "timer.h"
 #include "command.h"
@@ -13,6 +14,7 @@ static void hardware_init(void)
   timer_setup();
   led_setup();
   button_setup();
+  adc_setup();
 
   /* Enable interrupts */
   asm("setpsw i");

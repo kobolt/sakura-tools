@@ -1,6 +1,7 @@
 #include "opcode.h"
 #include "led.h"
 #include "button.h"
+#include "adc.h"
 #include "script.h"
 
 char *opcode_command(opcode_t op)
@@ -24,6 +25,7 @@ char *opcode_command(opcode_t op)
   case OPCODE_D4_ON:        return "d4 on";
   case OPCODE_D4_TOGGLE:    return "d4 toggle";
   case OPCODE_BUTTON:       return "button";
+  case OPCODE_ADC:          return "adc";
   case OPCODE_SCRIPT_RUN:   return "run";
   case OPCODE_SCRIPT_STOP:  return "stop";
   case OPCODE_SCRIPT_DUMP:  return "dump";
@@ -105,6 +107,10 @@ unsigned int opcode_execute(opcode_t op)
 
   case OPCODE_BUTTON:
     button_state_print();
+    break;
+
+  case OPCODE_ADC:
+    adc_data_print();
     break;
 
   case OPCODE_SCRIPT_RUN:
