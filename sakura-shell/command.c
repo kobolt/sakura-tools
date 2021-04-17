@@ -1,4 +1,4 @@
-#include "uart.h"
+#include "cdc.h"
 #include "script.h"
 #include "opcode.h"
 
@@ -129,7 +129,7 @@ void command_loop(void)
 
     script_execute();
 
-    c = uart0_recv();
+    c = cdc_recv();
     if (c == '\0') {
       continue;
     }
@@ -144,13 +144,13 @@ void command_loop(void)
       
       echo[0] = 0x08;
       echo[1] = '\0';
-      uart0_send(echo);
+      cdc_send(echo);
       echo[0] = ' ';
       echo[1] = '\0';
-      uart0_send(echo);
+      cdc_send(echo);
       echo[0] = 0x08;
       echo[1] = '\0';
-      uart0_send(echo);
+      cdc_send(echo);
 
       continue;
     }
@@ -160,13 +160,13 @@ void command_loop(void)
       command_len = 0;
       
       if (op == OPCODE_EVAL_ERROR) {
-        uart0_send("\r\nsyntax error!");
+        cdc_send("\r\nsyntax error!");
       } else {
         opcode_execute(op);
         /* Any returned delay is just ignored. */
       }
 
-      uart0_send("\r\nsakura> ");
+      cdc_send("\r\nsakura> ");
     } else {
       command[command_len] = c;
       command_len++;
@@ -176,7 +176,7 @@ void command_loop(void)
 
       echo[0] = c;
       echo[1] = '\0';
-      uart0_send(echo);
+      cdc_send(echo);
     }
   }
 }

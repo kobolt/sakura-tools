@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
 import serial
+import time
 
 class Sakura(object):
 	def __init__(self, port):
 		self.s = serial.Serial()
 		self.s.port = port
-		self.s.baudrate = 9600
+		self.s.baudrate = 115200
 		self.s.bytesize = serial.EIGHTBITS
 		self.s.parity = serial.PARITY_NONE
 		self.s.stopbits = serial.STOPBITS_ONE
@@ -14,6 +15,7 @@ class Sakura(object):
 		self.s.rtscts = False
 		self.s.dsrdtr = False
 
+		self.s.setDTR(False)
 		self.s.open()
 		self.s.flushInput()
 		self.s.flushOutput()
@@ -25,8 +27,10 @@ class Sakura(object):
 		print ">", cmd
 		for char in cmd:
 			self.s.write(char) # Write one character at a time...
+			time.sleep(0.01)
 			self.s.read(1)     # ...and read the echo.
 		self.s.write("\r") # Finish command...
+		time.sleep(0.01)
 		self.s.read(10)    # ...and read the prompt.
 
 	def script(self, filename):
@@ -43,7 +47,7 @@ class Sakura(object):
 
 if __name__ == "__main__":
 	import sys
-	s = Sakura("/dev/ttyUSB0")
+	s = Sakura("/dev/ttyACM0")
 
 	if len(sys.argv) > 1:
 		s.script(sys.argv[1])

@@ -1,6 +1,6 @@
 #include <iodefine.h>
 #include "button.h"
-#include "uart.h"
+#include "cdc.h"
 
 #define BUTTON_PIN PORTA.PDR.BIT.B7
 #define BUTTON     PORTA.PIDR.BIT.B7
@@ -14,9 +14,9 @@ void button_setup(void)
 void button_state_print(void)
 {
   if (BUTTON) {
-    uart0_send("\r\nreleased");
+    cdc_send("\r\nreleased");
   } else {
-    uart0_send("\r\npressed");
+    cdc_send("\r\npressed");
   }
 }
 

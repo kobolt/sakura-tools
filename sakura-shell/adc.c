@@ -1,6 +1,6 @@
 #include <iodefine.h>
 #include "adc.h"
-#include "uart.h"
+#include "cdc.h"
 
 void adc_setup(void)
 {
@@ -61,11 +61,11 @@ void adc_data_print(void)
   }
 
   for (adc_no = 0; adc_no <= 5; adc_no++) {
-    uart0_send("\r\nAN");
+    cdc_send("\r\nAN");
     text[0] = adc_no + 0x30;
     text[1] = '\0';
-    uart0_send(text);
-    uart0_send(": ");
+    cdc_send(text);
+    cdc_send(": ");
     switch (adc_no) {
     case 0:
       value = S12AD.ADDR0;
@@ -99,7 +99,7 @@ void adc_data_print(void)
     text[10] = ((value >> 1)  & 0x1) + 0x30;
     text[11] = ( value        & 0x1) + 0x30;
     text[12] = '\0';
-    uart0_send(text);
+    cdc_send(text);
   }
 }
 

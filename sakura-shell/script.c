@@ -1,6 +1,6 @@
 #include "opcode.h"
 #include "timer.h"
-#include "uart.h"
+#include "cdc.h"
 
 #define SCRIPT_MAX 100
 
@@ -64,9 +64,9 @@ void script_dump(void)
       output[4] = ':';
       output[5] = ' ';
       output[6] = '\0';
-      uart0_send(output);
+      cdc_send(output);
 
-      uart0_send(opcode_command(script[i]));
+      cdc_send(opcode_command(script[i]));
 
       if ((int)script_pointer == i) {
         output[0] = ' ';
@@ -74,7 +74,7 @@ void script_dump(void)
         output[2] = '-';
         output[3] = '-';
         output[4] = '\0';
-        uart0_send(output);
+        cdc_send(output);
       }
     }
   }
@@ -83,9 +83,9 @@ void script_dump(void)
 void script_state_print(void)
 {
   if (script_running) {
-    uart0_send("\r\nrunning");
+    cdc_send("\r\nrunning");
   } else {
-    uart0_send("\r\nstopped");
+    cdc_send("\r\nstopped");
   }
 }
 
