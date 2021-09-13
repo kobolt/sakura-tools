@@ -97,6 +97,8 @@ static opcode_t command_eval(char *cmd, signed char len)
     return OPCODE_BUTTON;
   } else if (command_match(cmd, len, opcode_command(OPCODE_ADC))) {
     return OPCODE_ADC;
+  } else if (command_match(cmd, len, opcode_command(OPCODE_SDCARD))) {
+    return OPCODE_SDCARD;
   } else if (command_match(cmd, len, opcode_command(OPCODE_SCRIPT_RUN))) {
     return OPCODE_SCRIPT_RUN;
   } else if (command_match(cmd, len, opcode_command(OPCODE_SCRIPT_STOP))) {

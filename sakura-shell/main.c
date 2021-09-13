@@ -2,6 +2,7 @@
 #include "button.h"
 #include "adc.h"
 #include "cdc.h"
+#include "sdcard.h"
 #include "uart.h"
 #include "timer.h"
 #include "command.h"
@@ -17,6 +18,7 @@ static void hardware_init(void)
   button_setup();
   adc_setup();
   cdc_setup();
+  sdcard_setup();
 
   /* Enable interrupts */
   asm("setpsw i");

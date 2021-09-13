@@ -7,7 +7,7 @@ LDFLAGS = -Wl,--gc-sections -nostartfiles
 sakura.bin: sakura.elf
 	$(TOOL_PATH)/rx-elf-objcopy -O binary $^ $@
 
-sakura.elf: crt0.o stubs.o main.o led.o button.o adc.o uart.o timer.o script.o opcode.o command.o cdc.o usbdescriptors.o usb_hal.o usb_core.o usb_cdc.o
+sakura.elf: crt0.o stubs.o main.o led.o button.o adc.o uart.o timer.o script.o opcode.o command.o cdc.o usbdescriptors.o usb_hal.o usb_core.o usb_cdc.o sdcard.o
 	$(TOOL_PATH)/rx-elf-gcc $(LDFLAGS) -T common/sakura_rx.ld $^ -o $@
 
 crt0.o: common/sakura_crt0.S
@@ -41,6 +41,9 @@ command.o: command.c
 	$(TOOL_PATH)/rx-elf-gcc $(CFLAGS) $^ -o $@
 
 cdc.o: cdc.c
+	$(TOOL_PATH)/rx-elf-gcc $(CFLAGS) $^ -o $@
+
+sdcard.o: sdcard.c
 	$(TOOL_PATH)/rx-elf-gcc $(CFLAGS) $^ -o $@
 
 main.o: main.c

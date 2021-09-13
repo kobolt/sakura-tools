@@ -31,6 +31,8 @@ typedef enum {
   OPCODE_BUTTON       = 0x60,
   OPCODE_ADC          = 0x61,
 
+  OPCODE_SDCARD       = 0x70,
+
   OPCODE_SCRIPT_RUN   = 0x101,
   OPCODE_SCRIPT_STOP  = 0x102,
   OPCODE_SCRIPT_DUMP  = 0x103,

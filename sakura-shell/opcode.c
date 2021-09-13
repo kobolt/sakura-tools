@@ -2,6 +2,7 @@
 #include "led.h"
 #include "button.h"
 #include "adc.h"
+#include "sdcard.h"
 #include "script.h"
 
 char *opcode_command(opcode_t op)
@@ -26,6 +27,7 @@ char *opcode_command(opcode_t op)
   case OPCODE_D4_TOGGLE:    return "d4 toggle";
   case OPCODE_BUTTON:       return "button";
   case OPCODE_ADC:          return "adc";
+  case OPCODE_SDCARD:       return "sdcard";
   case OPCODE_SCRIPT_RUN:   return "run";
   case OPCODE_SCRIPT_STOP:  return "stop";
   case OPCODE_SCRIPT_DUMP:  return "dump";
@@ -111,6 +113,10 @@ unsigned int opcode_execute(opcode_t op)
 
   case OPCODE_ADC:
     adc_data_print();
+    break;
+
+  case OPCODE_SDCARD:
+    sdcard_info_print();
     break;
 
   case OPCODE_SCRIPT_RUN:
